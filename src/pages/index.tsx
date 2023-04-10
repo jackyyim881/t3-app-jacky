@@ -1,9 +1,6 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
 
-import { useBoolean } from "@chakra-ui/react";
-import { api } from "y/utils/api";
 import CaptionCarousel from "./carousel";
 import Navbar from "./navbar";
 import CardTravel from "./card";
@@ -11,8 +8,6 @@ import Maps from "./map";
 // import { Input } from "postcss";
 
 const Home: NextPage = () => {
-  const hello = api.example.hello.useQuery({ text: "from tRPC" });
-  const [flag, setFlag] = useBoolean();
   return (
     <>
       <Head>

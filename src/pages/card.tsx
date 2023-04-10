@@ -7,11 +7,8 @@ import {
   Text,
   Container,
   Button,
-  ButtonGroup,
   AspectRatio,
   Image,
-  Stack,
-  Divider,
   Card,
   CardHeader,
   CardBody,
@@ -56,6 +53,7 @@ export default function CardTravel() {
           <SimpleGrid
             boxShadow={"2xl"}
             position="relative"
+            key={index}
             spacing={10}
             templateColumns="repeat(auto-fill, minmax(300px, 1fr))"
           >
