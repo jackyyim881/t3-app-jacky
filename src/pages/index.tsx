@@ -1,13 +1,30 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-
+import { FC, useEffect, useState } from "react";
+import { useBoolean, useConst, Spinner } from "@chakra-ui/react";
 import CaptionCarousel from "./carousel";
 import Navbar from "./navbar";
 import CardTravel from "./card";
 import Maps from "./map";
-// import { Input } from "postcss";
+import DatePicker from "react-date-picker";
+interface indexProps {}
 
-const Home: NextPage = () => {
+const Home: NextPage<indexProps> = ({}) => {
+  const [name, setName] = useState("");
+  const [flag, setFlag] = useBoolean();
+  const mountTime = useConst(() => new Date().toTimeString());
+  const obj = useConst({ a: Math.random() });
+  useEffect(() => {
+    const fetechData = async () => {
+      const res = await fetch("/api/introduction");
+      const data: any = await res.json();
+
+      setName(data.name);
+    };
+
+    fetechData();
+  }, []);
+
   return (
     <>
       <Head>
@@ -19,6 +36,12 @@ const Home: NextPage = () => {
       <CaptionCarousel />
       <CardTravel />
       <Maps />
+      <h1>{name}</h1>
+      <div>{flag ? mountTime : "Hover me to turn ON"}</div>
+      <button onClick={setFlag.toggle}>
+        Click me to toggle the boolean value
+      </button>
+      {/* <Spinner size="xl" /> */}
     </>
   );
 };

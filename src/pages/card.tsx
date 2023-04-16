@@ -12,12 +12,24 @@ import {
   Card,
   CardHeader,
   CardBody,
-  CardFooter,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalCloseButton,
+  ModalFooter,
+  Center,
 } from "@chakra-ui/react";
+
+import { useDisclosure } from "@chakra-ui/react";
+
 // Here we have used react-icons package for the icons
 // And react-slick as our Carousel Lib
 
 export default function CardTravel() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   // This list contains all the data for carousels
   // This can be static or loaded from a server
   const cards = [
@@ -75,7 +87,41 @@ export default function CardTravel() {
               </CardBody>
               <Box position="relative" h="100px">
                 <AbsoluteCenter p="4" axis="both">
-                  <Button>View here</Button>
+                  <Button onClick={onOpen}>one</Button>
+                  <Modal
+                    isCentered
+                    isOpen={isOpen}
+                    onClose={onClose}
+                    motionPreset="slideInBottom"
+                    size="6xl"
+                  >
+                    <ModalOverlay
+                      bg="none"
+                      backdropFilter="auto"
+                      backdropBlur="3px"
+                    />
+                    <ModalContent>
+                      <ModalHeader>Modal Title</ModalHeader>
+                      <ModalCloseButton />
+                      <ModalBody>
+                        <SimpleGrid columns={3}>
+                          {cards.map((cards, index) => (
+                            <Center>
+                              <Box key={index} bg="white" h="50%" w="50%">
+                                <Image
+                                  src={card.image}
+                                  alt="Green double couch with wooden legs"
+                                />
+                              </Box>
+                            </Center>
+                          ))}
+                        </SimpleGrid>
+                      </ModalBody>
+                      <ModalFooter>
+                        <Button onClick={onClose}>Close</Button>
+                      </ModalFooter>
+                    </ModalContent>
+                  </Modal>
                 </AbsoluteCenter>
               </Box>
             </Card>
